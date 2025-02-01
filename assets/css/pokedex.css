@@ -57,7 +57,7 @@
         grid-area: image1;
         z-index: 1;
         margin-bottom: -70px;
-        height: 120px;
+        height: 80px;
         mix-blend-mode: color-burn;
     }
     
