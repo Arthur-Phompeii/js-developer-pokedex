@@ -14,22 +14,18 @@
     border-radius: 1rem;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+}
+
+.pokemon:hover {
+    transform:scale(20px);
 }
 
 .name {
     color: #fff;
     margin: 0rem 0; 
     text-transform: capitalize;
-}
-
-.pokemon .detail img {
-    max-width: 100%;
-    height: 70px;
-    object-fit:contain;
-    background-image: url(../images/pokeball_vetor.png);
-    background-size: 110px;
-    border-radius: 0px 20px 10px;
-    background-repeat: no-repeat;
+    z-index: 2;
 }
 
 .pokemon .detail {
@@ -37,12 +33,48 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    gap: 1.1rem;
+    height: 70px;
+    z-index: 2;
+}
+
+.pokemon .Bg{
+    max-height: min-content;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: -115px;
+    margin-bottom: -60px;
+    margin-right: -50px;
+    mix-blend-mode: color-dodge;
+    
+    img {
+        height: 160px;
+        position: relative;
+        opacity: .25;
+    }
+}
+
+.pokemon .detail .image{
+    img{
+        max-width: 100%;
+        height: 70px;
+        width: 70px;
+        object-fit:contain;
+        position: relative;
+        background-repeat: no-repeat;
+        overflow: hidden;
+        /* display: flex;
+        justify-content: end; */
+    }
 }
 
 .number {
-    color: #3032327a;
+    color: #0000009a;
     text-align: right;
+    font-weight: 900;
+    z-index: 2;
+    mix-blend-mode:overlay;
 }
 
 .pokemon .detail .types {
@@ -116,7 +148,7 @@
 }
 .fairy{
     background-color:  #F7CBDF;
-    color: #85787d;
+    color: #a9819dae;
 }
 .psychic{
     background-color:  #F05889;
