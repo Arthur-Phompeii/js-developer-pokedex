@@ -41,4 +41,14 @@ body {
     border-radius: 1rem;
     color:#fff;
     background-color: #71599A;
+    transition: transform ease 0.15s;
+}
+
+.pagination button:hover {
+    transform:scale(120%);
+    background-color: #392163;
+    
+}
+.pagination button:active {
+    transform:scale(95%);     
 }

@@ -15,10 +15,15 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    transition: transform ease 0.15s;
 }
 
 .pokemon:hover {
-    transform:scale(20px);
+    transform:scale(103%);
+}
+.pokemon:active {
+    transform:scale(95%);
+    
 }
 
 .name {
@@ -26,6 +31,7 @@
     margin: 0rem 0; 
     text-transform: capitalize;
     z-index: 2;
+    user-select: none;
 }
 
 .pokemon .detail {
@@ -47,6 +53,7 @@
     margin-bottom: -60px;
     margin-right: -50px;
     mix-blend-mode: color-dodge;
+    user-select: none;
     
     img {
         height: 160px;
@@ -64,8 +71,7 @@
         position: relative;
         background-repeat: no-repeat;
         overflow: hidden;
-        /* display: flex;
-        justify-content: end; */
+        user-select: none;
     }
 }
 
@@ -75,6 +81,7 @@
     font-weight: 900;
     z-index: 2;
     mix-blend-mode:overlay;
+    user-select: none;
 }
 
 .pokemon .detail .types {
@@ -93,6 +100,7 @@
     text-align: center;
     border-radius: .625rem;
     filter: brightness(1.1);
+    user-select: none;
 }
 
 @media screen and (min-width: 410px) {

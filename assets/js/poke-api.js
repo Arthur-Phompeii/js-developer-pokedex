@@ -1,8 +1,11 @@
 const pokeApi = {}
+function formatNumber(number) { 
+    return number.toString().padStart(3, '0');     
+} 
 
 function convertPokeApiDetailToPokemon(pokeDetail) {
     const pokemon = new Pokemon()
-    pokemon.number = pokeDetail.id
+    pokemon.number = formatNumber(pokeDetail.id)
     pokemon.name = pokeDetail.name
 
     const types = pokeDetail.types.map((typeSlot) => typeSlot.type.name)
