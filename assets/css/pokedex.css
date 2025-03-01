@@ -16,6 +16,9 @@
     flex-direction: column;
     overflow: hidden;
     transition: transform ease 0.15s;
+
+    /* disabilitar os poquemons */
+    /* display: none; */
 }
 
 .pokemon:hover {

@@ -10,7 +10,7 @@ function loadPokemonItems(offset, limit) {
 //consumo API
     pokeApi.getPokemons(offset, limit).then((pokemons = []) => {       
         const newHtml = pokemons.map((pokemon) => `
-            <li class="pokemon ${pokemon.type}" draggable="false">
+            <li class="pokemon ${pokemon.type}" draggable="false" id="${pokemon.id}">
                 <span class="number">#${pokemon.number}</span>
                 <span class="name">${pokemon.name}</span>
         
