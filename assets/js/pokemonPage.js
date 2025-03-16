@@ -88,7 +88,51 @@ async function urlRequest(pokeId) {
     .then(convertPokeApiSpecificToPokemon)
 }
 
-
+const buttonBig = `
+    <div class="navBarSectionsNames active">
+        <div class="clickableObjectNavBar" id="baseStatsId">
+            <h2 id="nav1">Base Stats</h2>
+            <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15.5 1L17 2.5L8.5 11L1 2.5L2.5 1L8.5 7.5L15.5 1Z" fill="#ffffffb4" stroke="#ffffffb4" class="disabled"/>
+                <path d="M15.5 1L17 2.5L8.5 11L1 2.5L2.5 1L8.5 7.5L15.5 1Z" fill="#6a6a6a" stroke="#6a6a6a" class="greenArrow"/>
+            </svg>
+        </div>
+    </div>
+    <div class="navBarSectionsNames">
+        <div class="clickableObjectNavBar" id="statisticsId">
+            <h2 id="nav2">Statistics</h2>
+            <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15.5 1L17 2.5L8.5 11L1 2.5L2.5 1L8.5 7.5L15.5 1Z" fill="#ffffffb4" stroke="#ffffffb4" class="disabled"/>
+                <path d="M15.5 1L17 2.5L8.5 11L1 2.5L2.5 1L8.5 7.5L15.5 1Z" fill="#6a6a6a" stroke="#6a6a6a" class="greenArrow"/>
+            </svg>
+        </div>
+    </div>
+    <div class="navBarSectionsNames">
+        <div class="clickableObjectNavBar" id="movesId">
+            <h2 id="nav3">Moves</h2>
+            <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15.5 1L17 2.5L8.5 11L1 2.5L2.5 1L8.5 7.5L15.5 1Z" fill="#ffffffb4" stroke="#ffffffb4" class="disabled"/>
+                <path d="M15.5 1L17 2.5L8.5 11L1 2.5L2.5 1L8.5 7.5L15.5 1Z" fill="#6a6a6a" stroke="#6a6a6a" class="greenArrow"/>
+            </svg>
+        </div>
+    </div>
+    <div class="navBarSectionsNames">
+        <div class="clickableObjectNavBar" id="othersId">
+            <h2 id="nav4">Others</h2>
+        <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15.5 1L17 2.5L8.5 11L1 2.5L2.5 1L8.5 7.5L15.5 1Z" fill="#ffffffb4" stroke="#ffffffb4" class="disabled"/>
+            <path d="M15.5 1L17 2.5L8.5 11L1 2.5L2.5 1L8.5 7.5L15.5 1Z" fill="#6a6a6a" stroke="#6a6a6a" class="greenArrow"/>
+        </svg>
+        </div>
+    </div>
+    `;
+const buttonSmall = `
+    <select name="comidas" class="navBarSelectNames">
+        <option selected value="BaseStats">Base Stats</option>
+        <option value="Statistics">Statistics</option>
+        <option value="Values">Values</option>
+        <option value="Other">Other</option>
+    </select>`;
 
 function loadPokePage(ID) {
   urlRequest(ID).then((pokemon) => {
@@ -100,6 +144,8 @@ function loadPokePage(ID) {
         const pokeTypesHtml = pokemon.types.length === 1 ? 
         `<span class="${pokemon.type}" style="text-transform: capitalize;">${pokemon.type}</span>` :
         `<span class="tipo1 ${pokemon.type}">${pokemon.type}</span>
+        <div class="typeDivisory" id="typeDivisoryId" style="border: 20px solid;"></div>
+        <div class="whiteDivisory"></div>
         <span class="tipo2 ${pokemon.types[1]}">${pokemon.types[1]}</span>`;
         const pokeWeightHtml = pokemon.weight / 10;
         const pokeHeightHtml = pokemon.height / 10;
@@ -151,7 +197,6 @@ function loadPokePage(ID) {
             let isNormal = 0;
             let isHidden = false;
             let textAbilitiesDirect = [];
-            let textAbilitiesFunction =[];
 
             for (let i = 0; i < pokemon.abilities.length; i++) {
                 if (pokemon.abilities[i][1] == true) {
@@ -173,7 +218,6 @@ function loadPokePage(ID) {
                             textAbilitiesDirect.push(convertedAbility[i].short_effect);
                         } 
                     }
-                    console.log(textAbilitiesDirect);
                     if (pokemon.abilities.length == 0) {
                         title1.textContent = "None";
                         text1.textContent = "-";
@@ -218,8 +262,6 @@ function loadPokePage(ID) {
                 if (verify == null) { 
                     const sprite = document.getElementById("pokeball"+ [i]);
                     sprite.style.display = "none";
-                } else {
-                    console.log(pokemon.sprites[i])
                 }
             }
             pokeballButton.forEach(function(button) {
@@ -239,63 +281,129 @@ function loadPokePage(ID) {
         }
 
         function getColor() {
-            const normal = tinycolor("#ACAA7A");
-            const flying = tinycolor("#9E8FC5");
-            const water = tinycolor("#6E8BC6");
-            const ice = tinycolor("#98D6D5");
-            const fire = tinycolor("#F17F2D");
-            const dragon = tinycolor("#6357A6");
-            const electric = tinycolor("#F7D233");
-            const steel = tinycolor("#B8B8D2");
-            const rock = tinycolor("#B9A338");
-            const ground = tinycolor("#E0C166");
-            const grass = tinycolor("#79C251");
-            const fairy = tinycolor("#F7CBDF");
-            const psychic = tinycolor("#F05889");
-            const fighting = tinycolor("#C4312B");
-            const bug = tinycolor("#AABA39");
-            const poison = tinycolor("#9E4399");
-            const dark = tinycolor("#725A4A");
-            const ghost = tinycolor("#71599A");
+            const typeColors = {
+                normal: tinycolor("#ACAA7A"),
+                flying: tinycolor("#9E8FC5"),
+                water: tinycolor("#6E8BC6"),
+                ice: tinycolor("#98D6D5"),
+                fire: tinycolor("#F17F2D"),
+                dragon: tinycolor("#6357A6"),
+                electric: tinycolor("#F7D233"),
+                steel: tinycolor("#B8B8D2"),
+                rock: tinycolor("#B9A338"),
+                ground: tinycolor("#E0C166"),
+                grass: tinycolor("#79C251"),
+                fairy: tinycolor("#F7CBDF"),
+                psychic: tinycolor("#F05889"),
+                fighting: tinycolor("#C4312B"),
+                bug: tinycolor("#AABA39"),
+                poison: tinycolor("#9E4399"),
+                dark: tinycolor("#725A4A"),
+                ghost: tinycolor("#71599A"),
+            }
 
             const pokeCard = document.getElementById('pokeCard');
-           /* const letters = fazerum blend mode para ficar mais fácil; */
-           const spriteControls = document.getElementById('spriteControlId');
-           const navBar = document.getElementById('outerNavBarDiv');
-
+            const spriteControls = document.getElementById('spriteControlId');
+            const navBar = document.getElementById('outerNavBarDiv');
+            const sideInfo = document.getElementById('side_infoTableId');
+            const navButton = document.getElementById('nav1');
+            
+            const typesDivisory = document.getElementById('typeDivisoryId')
 
             function generateGradient(color) {
                 const baseColor = tinycolor(color);
                 const color1 = baseColor.lighten(10).toString();
-                const color2 = baseColor.darken(30).toString();
+                const color2 = baseColor.darken(10).toString();
                 const color3 = baseColor.darken(10).toString();
-                const color4 = baseColor.lighten(30).toString();
+                const newBaseColor = tinycolor(color);
+                const color4 = newBaseColor.clone().darken(20).setAlpha(.4).toString();
+                const color5 = newBaseColor.clone().lighten(45).toString();
 
-                const gradient = new Color();
-                pokeCard.style = `linear-gradient(190.58deg, ${baseColor} 9.74%, ${color1} 90.93%)`;
+                if (color._originalInput == "#F7CBDF") {
+                    const colorPink = baseColor.lighten(10).darken(5).toString();
+                    pokeCard.style.background = `linear-gradient(25deg, ${color2} 9.74%, ${color1} 190.93%)`;
 
-                gradient.darkLetter = `color: ${color2}`;
+                    spriteControls.style.background = `linear-gradient(77.87deg, ${colorPink} -26.05%, ${color1} 250.65%)`;
 
-                gradient.spriteNav = `linear-gradient(77.87deg, ${color3} -26.05%, ${color1} 250.65%)`;
+                    navBar.style.background = `linear-gradient(2deg, ${color2} -12.52%, ${color1} 180.09%)`;
 
-                gradient.sideSectionNav = `linear-gradient(180deg, ${color1} -12.52%, ${color4} 180.09%)`;
-                return gradient;
+                    sideInfo.style.background = `linear-gradient(105.4deg, #FFFFFF 3.9%, ${color5} 100%)`;
+
+                    navBar.style.boxShadow = `1px 5px 10px ${color4}`; 
+
+                    
+                } else if (color._originalInput == "#9E4399") {
+                    pokeCard.style.background = `linear-gradient(190.58deg, ${color2} 9.74%, ${color1} 90.93%)`;
+
+                    spriteControls.style.background = `linear-gradient(77.87deg, ${color3} -26.05%, ${color1} 250.65%)`;
+
+                    navBar.style.background = `linear-gradient(357deg, ${color2} -12.52%, ${color1} 180.09%)`;
+
+                    sideInfo.style.background = `linear-gradient(105.4deg, #FFFFFF 3.9%, ${color5} 100%)`;
+
+                    navBar.style.boxShadow = `1px 5px 10px ${color4}`; 
+                    
+                    navButton.style.color = "#4e4e4e";
+                }else {
+
+                pokeCard.style.background = `linear-gradient(190.58deg, ${color2} 9.74%, ${color1} 90.93%)`;
+
+                spriteControls.style.background = `linear-gradient(77.87deg, ${color3} -26.05%, ${color1} 250.65%)`;
+
+                navBar.style.background = `linear-gradient(357deg, ${color2} -12.52%, ${color1} 180.09%)`;
+
+                sideInfo.style.background = `linear-gradient(105.4deg, #FFFFFF 3.9%, ${color5} 100%)`;
+
+                navBar.style.boxShadow = `1px 5px 10px ${color4}`; 
+                }
             }
-            generateGradient(pokemon.type);
+            const pokemonType = pokemon.type.toLowerCase();
+            const originalColor = typeColors[pokemonType];
+            generateGradient(originalColor);
+
+            const pokemonSecondType = pokemon.types[1].toLowerCase();
+            const secondColor = typeColors[pokemonSecondType];
+
+            typesDivisory.style.borderColor = `${originalColor._originalInput} ${secondColor._originalInput} ${secondColor._originalInput} ${originalColor._originalInput}`;
         }
         
+        function verifyNavButtons() {
+            const winWidth = window.innerWidth;
+            const navBarHtml = document.getElementById('navBarId');
+    
+            if (winWidth < 993) {
+                navBarHtml.innerHTML = buttonSmall
+            } else if (winWidth >= 993) {
+                navBarHtml.innerHTML = buttonBig
+            }
+        }
+
+        function addListenersToNavButtons() {
+            const buttons = Array.from(document.querySelectorAll('.clickableObjectNavBar'));
+            console.log(buttons);
+            buttons.forEach(bttn => {
+                bttn.addEventListener('click', function() {
+                    console.log(`Você escolheu o botão ${this.id}`);
+                    buttons.forEach(button => { 
+                        const parentElement = button.parentElement;
+                        parentElement.classList.remove('active');
+                    });
+                    this.parentElement.classList.add('active');
+                }); 
+            });
+        };
 
         const pokeAbilitiesHtml = 
         `<div class="normalAbilities">
             <article class="ability1">
                 <small class="subCardSubtitles">First Ability -</small>
-                <p class="abilityTitle" id="abilityTitle1"></p>
-                <p class="abilityText" id="abilityText1"></p>
+                <p class="abilityTitle" id="abilityTitle1">Carregando...</p>
+                <p class="abilityText" id="abilityText1">Carregando...</p>
             </article>
             <article class="ability2">
                 <small class="subCardSubtitles">Second Ability -</small>
-                <p class="abilityTitle" id="abilityTitle2">:</p>
-                <p class="abilityText" id="abilityText2"></p>
+                <p class="abilityTitle" id="abilityTitle2">Carregando...</p>
+                <p class="abilityText" id="abilityText2">Carregando...</p>
             </article>
         </div>
         <div class="hiddenAbility" id="hiddenAbilityDiv">
@@ -316,7 +424,7 @@ function loadPokePage(ID) {
         const newPokePage = `
         <div class="backButtonDiv" id="backButtonDiv">
             <svg width="9" height="13" viewBox="0 0 9 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7.5 2L3 6.5L7.5 11L6.50006 12L1 6.5L6.50006 1L7.5 2Z" fill="#c8c8c8" stroke="#c8c8c8" id="backButton"/>
+                <path d="M7.5 2L3 6.5L7.5 11L6.50006 12L1 6.5L6.50006 1L7.5 2Z" fill="#737373" stroke="#737373" id="backButton"/>
             </svg>
             <label for="backButton"><p>Back</p></label>
         </div>
@@ -394,82 +502,53 @@ function loadPokePage(ID) {
                     </div>
                 </section>
             </section>
-            <section class="side_infoTable">
+            <section class="side_infoTable" id="side_infoTableId">
                 <nav class="top_navBar" id="outerNavBarDiv">
-                    <div class="navBar">
-                        <div class="navBarSectionsNames active">
-                            <div class="clickableObjectNavBar">
-                                <h2 id="nav1">Base Stats</h2>
-                                <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M15.5 1L17 2.5L8.5 11L1 2.5L2.5 1L8.5 7.5L15.5 1Z" fill="#ffffffb4" stroke="#ffffffb4" class="disabled"/>
-                                    <path d="M15.5 1L17 2.5L8.5 11L1 2.5L2.5 1L8.5 7.5L15.5 1Z" fill="#244305" stroke="#244305" class="greenArrow"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="navBarSectionsNames">
-                            <div class="clickableObjectNavBar">
-                                <h2 id="nav2">Statistics</h2>
-                                <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M15.5 1L17 2.5L8.5 11L1 2.5L2.5 1L8.5 7.5L15.5 1Z" fill="#ffffffb4" stroke="#ffffffb4" class="disabled"/>
-                                    <path d="M15.5 1L17 2.5L8.5 11L1 2.5L2.5 1L8.5 7.5L15.5 1Z" fill="#244305" stroke="#244305" class="greenArrow"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="navBarSectionsNames">
-                            <div class="clickableObjectNavBar">
-                                <h2 id="nav3">Moves</h2>
-                            <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M15.5 1L17 2.5L8.5 11L1 2.5L2.5 1L8.5 7.5L15.5 1Z" fill="#ffffffb4" stroke="#ffffffb4" class="disabled"/>
-                                <path d="M15.5 1L17 2.5L8.5 11L1 2.5L2.5 1L8.5 7.5L15.5 1Z" fill="#244305" stroke="#244305" class="greenArrow"/>
-                            </svg>
-                            </div>
-                        </div>
-                        <div class="navBarSectionsNames">
-                            <div class="clickableObjectNavBar">
-                                <h2 id="nav4">Others</h2>
-                            <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M15.5 1L17 2.5L8.5 11L1 2.5L2.5 1L8.5 7.5L15.5 1Z" fill="#ffffffb4" stroke="#ffffffb4" class="disabled"/>
-                                <path d="M15.5 1L17 2.5L8.5 11L1 2.5L2.5 1L8.5 7.5L15.5 1Z" fill="#244305" stroke="#244305" class="greenArrow"/>
-                            </svg>
-                            </div>
-                        </div> 
+                    <div class="navBar" id="navBarId">
+                        
                     </div>
                 </nav>
                 <div class="stats">
                     <div class="statsDiv">
-                        <h2 class="statsText-1">${pokemon.stats[0][0]}</h2>
-                        <div id="statusBar1">
+                        <h2 class="statsText-1">${pokemon.stats[0][0]} - ${pokemon.stats[0][1]}</h2>
+                        <div id="statusBar1" class="statusBarClass">
                             <input type="range" disabled value="${pokemon.stats[0][1]}" max="255" class="lowStat" id="status0">
+                            <p class="statusBarNumber">255</p>
                         </div>
                     </div>
                     <div class="statsDiv">
-                        <h2 class="statsText-2">${pokemon.stats[1][0]}</h2>
-                        <div id="statusBar2">
-                            <input type="range" disabled value="${pokemon.stats[1][1]}" max="255" class="goodStat" id="status1">
+                        <h2 class="statsText-2">${pokemon.stats[1][0]} - ${pokemon.stats[1][1]}</h2>
+                        <div id="statusBar2" class="statusBarClass">
+                            <input type="range" disabled value="${pokemon.stats[1][1]}" max="255" class="lowStat" id="status1">
+                            <p class="statusBarNumber">255</p>
                         </div>
                     </div>
                     <div class="statsDiv">
-                        <h2 class="statsText-3">${pokemon.stats[2][0]}</h2>
-                        <div id="statusBar3">
-                            <input type="range" disabled value="${pokemon.stats[2][1]}" max="255" class="goodStat" id="status2">
+                        <h2 class="statsText-3">${pokemon.stats[2][0]} - ${pokemon.stats[2][1]}</h2>
+                        <div id="statusBar3" class="statusBarClass">
+                            <input type="range" disabled value="${pokemon.stats[2][1]}" max="255" class="lowStat" id="status2">
+                            <p class="statusBarNumber">255</p>
                         </div>
                     </div>
                     <div class="statsDiv">
-                        <h2 class="statsText-4">${pokemon.stats[3][0]}</h2>
-                        <div id="statusBar4">
+                        <h2 class="statsText-4">${pokemon.stats[3][0]} - ${pokemon.stats[3][1]}</h2>
+                        <div id="statusBar4" class="statusBarClass">
                             <input type="range" disabled value="${pokemon.stats[3][1]}" max="255" class="lowStat" id="status3">
+                            <p class="statusBarNumber">255</p>
                         </div> 
                     </div>
                     <div class="statsDiv">
-                        <h2 class="statsText-5">${pokemon.stats[4][0]}</h2>
-                        <div id="statusBar5">
+                        <h2 class="statsText-5">${pokemon.stats[4][0]} - ${pokemon.stats[4][1]}</h2>
+                        <div id="statusBar5" class="statusBarClass">
                             <input type="range" disabled value="${pokemon.stats[4][1]}" max="255" class="lowStat" id="status4">
+                            <p class="statusBarNumber">255</p>
                         </div>
                     </div>
                     <div class="statsDiv">
-                        <h2 class="statsText-6">${pokemon.stats[5][0]}</h2>
-                        <div id="statusBar6">
+                        <h2 class="statsText-6">${pokemon.stats[5][0]} - ${pokemon.stats[5][1]}</h2>
+                        <div id="statusBar6" class="statusBarClass">
                             <input type="range" disabled value="${pokemon.stats[5][1]}" max="255" class="lowStat" id="status5">
+                            <p class="statusBarNumber">255</p>
                         </div>
                     </div>
                 </div>
@@ -478,15 +557,19 @@ function loadPokePage(ID) {
 
         individualPageSection.innerHTML = newPokePage;
         mainElement.appendChild(individualPageSection);
-        getColor();
         pokedex.classList.add("pokedexActivated")
+        document.body.style.overflow = 'hidden';
+
+        
+        verifyNavButtons()
         verifyAbilities()
         verifyStats();
         audioControls();
         spriteController();
         backButton();
         individualPageSection.lastElementChild.classList.add('suspenso');
-        /* const pokePageChild = document.getElementById  ('pokePageContent'); */
+        getColor();
+        addListenersToNavButtons();
   });
 }
 
@@ -501,6 +584,7 @@ function backButton() {
         pokemonPage.remove();
         pokedex.classList.remove("pokedexActivated");
         backButton.removeEventListener;
+        document.body.style.overflow = 'auto';
     });
 }
 
@@ -550,4 +634,25 @@ function openHiddenAbility() {
     abilityOuterDiv.classList.toggle("abilityActivated");
 }
 
+function navBarButton() {
+    const a = b;
+    f=a 
+}
 
+window.addEventListener('resize', function(event) {
+    var winWidth = window.innerWidth;
+
+    const navBarHtml = document.getElementById('navBarId');
+    function navBarUpdate() {
+        if (winWidth < 993) {
+            if (navBarHtml.innerHTML == buttonSmall) {
+                console.log("Botão Estilo grande está Ok");
+            } else {navBarHtml.innerHTML = buttonSmall;}
+        } else if (winWidth >= 993){
+            if (navBarHtml.innerHTML == buttonBig) {
+                console.log("Botão Estilo grande está Ok");
+            } else {navBarHtml.innerHTML = buttonBig;}
+        }
+    }
+    navBarUpdate();
+});

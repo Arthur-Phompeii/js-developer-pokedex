@@ -1,7 +1,7 @@
 @import url(./pokedex.css);
 @import url(./pokemon_page.css);
 * {
-    font-family: 'Montserrat', 'Inter', 'sans-serif';
+    font-family: 'Montserrat', 'sans-serif';
     box-sizing: border-box;
     list-style-type: none;
     margin: .55 0;
